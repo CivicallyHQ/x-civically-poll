@@ -1,0 +1,4 @@
+en:
+  poll:
+    cant_vote_in_foreign_places: "You can only vote on polls in your place or your country."
+    cant_vote_until_member_of_place: "You have to be a member of a place to vote on a poll."
