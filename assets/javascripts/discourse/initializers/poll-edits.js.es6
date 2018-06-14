@@ -18,18 +18,25 @@ export default {
           const chosen = vote.indexOf(option.id) !== -1;
           const user = this.currentUser;
           const post = this.parentWidget.attrs.post;
+          const categoryId = post.topic.category.id;
 
-          if (user && user.place_category_id && post &&
-              (user.place_category_id === post.topic.category.id ||
-              user.place_category_id === post.topic.category.parent_category_id)) {
+          if (user && post &&
+              user.town_category_id &&
+              (user.neighbourhood_category_id === categoryId ||
+               user.town_category_id === categoryId ||
+               user.town.parent_category_id === categoryId)) {
+
             if (attrs.isMultiple) {
               result.push(iconNode(chosen ? 'check-square-o' : 'square-o'));
             } else {
               result.push(iconNode(chosen ? 'dot-circle-o' : 'circle-o'));
             }
+
             result.push(' ');
           }
+          
           result.push(optionHtml(option));
+
           return result;
         },
       });

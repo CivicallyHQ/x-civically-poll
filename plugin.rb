@@ -9,12 +9,15 @@ after_initialize do
     def vote(post_id, poll_name, options, user)
       post = Post.find(post_id)
 
-      if !user.place_category_id
+      if !user.town_category_id
         raise StandardError.new I18n.t("poll.cant_vote_until_member_of_place")
       end
 
-      if user.place_category_id != post.topic.category.id &&
-        user.place_category_id != post.topic.category.parent_category.id
+      category_id = post.topic.category.id
+
+      if user.neighbourhood_category_id != category_id &&
+         user.town_category_id != category_id &&
+         user.town.parent_category_id != category_id
         raise StandardError.new I18n.t("poll.cant_vote_in_foreign_places")
       end
 
